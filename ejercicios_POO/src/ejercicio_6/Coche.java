@@ -20,6 +20,10 @@ public class Coche {
     }
     
     public void avanzar(){
-        
+        System.out.println(">>");
+        motor.inyectarCarburante();
+        for (int i = 0; i < ruedas.length; i++) {
+            ruedas[i].girar();
+        }
     }
 }
