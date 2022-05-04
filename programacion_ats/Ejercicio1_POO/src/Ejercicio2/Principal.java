@@ -42,10 +42,10 @@ public class Principal {
                 default:
                     System.out.println("Movimiento no válido");
             }
-
+            System.out.println("Haga otro movimiento");
             movement = teclado.next().toUpperCase().charAt(0);
 
         }
-
+        System.out.println("¡Gracias por jugar!");
     }
 }
