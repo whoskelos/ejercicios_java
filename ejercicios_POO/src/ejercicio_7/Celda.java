@@ -5,6 +5,7 @@ package ejercicio_7;
  * @author Kelvin
  */
 public class Celda {
+
     private String nombre;
     private boolean estaAbierta;
     private int codigoSeguridad;
@@ -12,7 +13,7 @@ public class Celda {
     public Celda(String nombre, boolean estaAbierta, int codigoSeguridad) {
         this.nombre = nombre;
         this.estaAbierta = estaAbierta;
-        this.codigoSeguridad = codigoSeguridad;
+        this.codigoSeguridad = codigoSeguridad; //de 4 digitos
     }
 
     public String getNombre() {
@@ -38,9 +39,22 @@ public class Celda {
     public void setCodigoSeguridad(int codigoSeguridad) {
         this.codigoSeguridad = codigoSeguridad;
     }
-    
-    public void abrirCerrarCelda(int codigo){
-        
+
+    public void abrirCerrarCelda(int codigo) {
+        //comprobamos si el código introducido por parámetro es igual al que 
+        //le corresponde a la celda
+        if (this.codigoSeguridad != codigo) {
+            System.out.println("El código es incorrecto");
+            this.estaAbierta = false; //si el codigo esta mal puerta cerrada
+        } else {
+            if (estaAbierta) { //si esta abierta la cierra
+                this.estaAbierta = false;
+                System.out.println("Puerta cerrada");
+            } else { //si esta cerrada la abre
+                this.estaAbierta = true;
+                System.out.println("Puerta abierta");
+            }
+        }
     }
-    
+
 }

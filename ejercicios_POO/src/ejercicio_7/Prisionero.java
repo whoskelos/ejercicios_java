@@ -11,11 +11,11 @@ public class Prisionero {
     private int condena;
     private Celda celda;
 
-    public Prisionero(String nombre, double altura, int condena, Celda celda) {
+    public Prisionero(String nombre, double altura, int condena) {
         this.nombre = nombre;
         this.altura = altura;
         this.condena = condena;
-        this.celda = celda;
+//        this.celda = celda;
     }
 
     public String getNombre() {
