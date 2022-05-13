@@ -40,12 +40,12 @@ public class Celda {
         this.codigoSeguridad = codigoSeguridad;
     }
 
-    public void abrirCerrarCelda(int codigo) {
+    public boolean abrirCerrarCelda(int codigo) {
         //comprobamos si el código introducido por parámetro es igual al que 
         //le corresponde a la celda
         if (this.codigoSeguridad != codigo) {
-            System.out.println("El código es incorrecto");
             this.estaAbierta = false; //si el codigo esta mal puerta cerrada
+            return false;
         } else {
             if (estaAbierta) { //si esta abierta la cierra
                 this.estaAbierta = false;
@@ -54,6 +54,7 @@ public class Celda {
                 this.estaAbierta = true;
                 System.out.println("Puerta abierta");
             }
+            return true;
         }
     }
 

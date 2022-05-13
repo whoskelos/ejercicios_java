@@ -1,4 +1,3 @@
-
 package ejercicio_7;
 
 /**
@@ -6,6 +5,7 @@ package ejercicio_7;
  * @author Kelvin
  */
 public class Prisionero {
+
     private String nombre;
     private double altura;
     private int condena;
@@ -49,13 +49,17 @@ public class Prisionero {
     public void setCelda(Celda celda) {
         this.celda = celda;
     }
-    
-    public String pensar(){
+
+    public String pensar() {
         return "¿Cómo puedo salir de aquí?";
     }
-    
-    public void heLlegado(Carcelero carcelero){
-        
+
+//    public void heLlegado(Carcelero carcelero){
+//        
+//    }
+    @Override
+    public String toString() {
+        return "Prisionero{" + "nombre=" + nombre + ", altura=" + altura + ", condena=" + condena + ", celda=" + celda.getNombre() + '}';
     }
-    
+
 }
