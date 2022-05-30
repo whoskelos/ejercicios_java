@@ -38,6 +38,7 @@ public class Principal {
             //creo centralita le paso la lista de las llamadas
             Centralita centralita = new Centralita(arr_llamadas);
             centralita.mostrar_informe();
+
         } catch (Exception ex) {
             System.out.println("error: " + ex.getMessage());
         }

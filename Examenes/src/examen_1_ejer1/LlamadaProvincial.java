@@ -7,14 +7,12 @@ package examen_1_ejer1;
 public class LlamadaProvincial extends Llamada {
 
     //atributos
-    private static int totalLlamadasP = 0;
     private int franja;
 
     //constructor
     public LlamadaProvincial(int numOrigen, int numDestino, int duracion, int franja) {
         super(numOrigen, numDestino, duracion);
         this.franja = franja;
-        totalLlamadasP++;
     }
 
     //métodos
@@ -34,5 +32,7 @@ public class LlamadaProvincial extends Llamada {
         }
         return precio_llamada;
     }
+
+
 
 }

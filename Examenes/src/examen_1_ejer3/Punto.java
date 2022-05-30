@@ -1,5 +1,8 @@
 package examen_1_ejer3;
 
+import java.io.*;
+import java.util.ArrayList;
+
 /*
 3o.- Crear la clase Punto, cuyos atributos son:
 int coordX, int coordY, double distOrigen
@@ -24,18 +27,16 @@ métodos de los dos apartados anteriores.
  *
  * @author Kelvin
  */
-public class Punto {
+public class Punto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private int coordX, coordY;
     private double distOrigen;
 
-    public Punto(int coordX, int coordY, double distOrigen) {
+    public Punto(int coordX, int coordY) {
         this.coordX = coordX;
         this.coordY = coordY;
-        this.distOrigen = distOrigen;
-    }
-
-    public Punto() {
     }
 
     public int getCoordX() {
@@ -55,6 +56,7 @@ public class Punto {
     }
 
     public double getDistOrigen() {
+        distOrigen = Math.sqrt(Math.pow(coordX, 2) + Math.pow(coordY, 2));
         return distOrigen;
     }
 
@@ -64,14 +66,93 @@ public class Punto {
 
     @Override
     public String toString() {
-        return "Punto{" + "coordX=" + coordX + ", coordY=" + coordY 
-                + ", distOrigen=" + distOrigen + '}';
+        return "Punto{" + "coordX=" + coordX + ", coordY=" + coordY
+                + ", distOrigen=" + getDistOrigen() + '}';
     }
-    
-    
 
-    public static void almacenarPuntosEnArchivo(String ficheroNuevo, 
+    public static void almacenarPuntosEnArchivo(String ficheroNuevo,
             String ficheroPuntos) {
-        
+        ArrayList<Punto> listaPuntos = new ArrayList<>();
+        Punto punto;
+        int x;
+        int y;
+
+        /*
+        LEEMOS EL FICHERO puntos.bin e instanciamos nuevos puntos
+        y los guardamos en un arrayList
+         */
+        try {
+            FileInputStream fis = new FileInputStream(ficheroPuntos);
+            DataInputStream dis = new DataInputStream(fis);
+            System.out.println("X       Y");
+            try {
+                while (true) {
+                    x = dis.readInt();
+                    y = dis.readInt();
+                    punto = new Punto(x, y);
+                    listaPuntos.add(punto);
+                    System.out.printf("%-6d%4d\n", x, y);
+                }
+            } catch (EOFException ex) {
+                System.out.println("Final del fichero " + ex.getMessage());
+            }
+            dis.close();
+            fis.close();
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+
+        /*
+            Hay que leer el ArrayList y escribimos en un nuevo fichero
+            serializable los nuevos puntos generados
+         */
+        try {
+
+            FileOutputStream fos = new FileOutputStream(ficheroNuevo, true);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            oos.writeObject(listaPuntos);
+
+            oos.close();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Fichero no localizado: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("error: " + ex.getMessage());
+        }
+    }
+
+    public static Punto crearPunto(int x, int y) {
+        Punto punto = new Punto(x, y);
+        return punto;
+    }
+
+    public static ArrayList obtenerArrayListDeArchivo(String fichPuntos) {
+        ArrayList<Punto> listaNuevaPuntos = new ArrayList<>();
+        /*
+            Leemos el fichero nuevo que se genera con el metodo
+            almacenarPuntosEnArchivo()
+            
+         */
+        try {
+            /*
+            Leemos los objetos del fichero
+            */
+            FileInputStream fis = new FileInputStream(fichPuntos);
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            /*
+            Guardamos en el ArrayList los objetos que obtenemos del
+            fichero que hemos leído
+            */
+            listaNuevaPuntos = (ArrayList<Punto>) ois.readObject();
+            ois.close();
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("Fichero no localizado: " + ex.getMessage());
+        } catch (IOException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return listaNuevaPuntos;
     }
 }

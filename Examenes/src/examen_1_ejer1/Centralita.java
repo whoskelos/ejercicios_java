@@ -21,10 +21,11 @@ public class Centralita {
     public void mostrar_informe() {
         double facturacion_total = 0;
         for (Llamada llamada : llamadas) {
-//            facturacion_total += llamada.coste_total();
+            System.out.println(llamada.toString());
+            facturacion_total += llamada.coste_total();
         }
-        System.out.println(facturacion_total/100);
-
+        System.out.println("Facturación total = " + facturacion_total / 100 + "€");
+        
     }
 
 }

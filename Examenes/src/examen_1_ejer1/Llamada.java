@@ -40,7 +40,7 @@ public abstract class Llamada {
     public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
-    
+
     public abstract double coste_total();
 
     @Override
